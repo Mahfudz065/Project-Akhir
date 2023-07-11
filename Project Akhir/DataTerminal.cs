@@ -16,5 +16,12 @@ namespace Project_Akhir
         {
             InitializeComponent();
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            DataPenumpang  dataPenumpang = new DataPenumpang();
+            dataPenumpang.Show();
+            this.Hide();
+        }
     }
 }

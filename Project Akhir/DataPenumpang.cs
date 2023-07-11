@@ -88,7 +88,7 @@ namespace Project_Akhir
                     {
                         sqlConnection.Open();
                         int rowsAffected = cmd.ExecuteNonQuery();
-                        MessageBox.Show("Data successfully added.");
+                        MessageBox.Show("DATA BERHASIL DITAMBAHKAN");
                     }
                     catch (SqlException ex)
                     {
@@ -101,5 +101,41 @@ namespace Project_Akhir
                 }
             }
         }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            DataTerminal dataTerminal = new DataTerminal();
+            dataTerminal.Show();
+            this.Hide();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            string connString = "data source= DESKTOP-LAFVQ8T\\MAHFUDZSIDDIQ;Initial Catalog=Terminal_Bus_CEO;Persist Security Info=True;User ID = sa; Password = 123";
+            string query = "DELETE FROM Penumpang WHERE Id_Penumpang = @Id_Penumpang";
+
+            using (SqlConnection connection = new SqlConnection(connString))
+            {
+                using (SqlCommand cmd = new SqlCommand(query, sqlConnection))
+                {
+                    cmd.Parameters.AddWithValue("@Id_Penumpang", textBox1);
+                    try
+                    {
+                        sqlConnection.Open();
+                        int rowsAffected = cmd.ExecuteNonQuery();
+                        MessageBox.Show("DATA BERHASIL DITAMBAHKAN");
+                    }
+                    catch (SqlException ex)
+                    {
+                        MessageBox.Show("TERJADI KESALAHAN: " + ex.Message + " (Error Code: " + ex.Number + ")");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("TERJADI KESALAHAN: " + ex.Message);
+                    }
+                }
+            }
+        }
+         
     }
 }
