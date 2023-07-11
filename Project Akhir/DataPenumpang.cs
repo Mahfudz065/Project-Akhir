@@ -13,7 +13,7 @@ namespace Project_Akhir
 {
     public partial class DataPenumpang : Form
     {
-        private SqlConnection conn;
+        public SqlConnection sqlConnection;
 
         public object IdPenumpang { get; private set; }
 
@@ -36,39 +36,70 @@ namespace Project_Akhir
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string connString = "data source=DESKTOP-LAFVQ8T\\MahfudzSiddiq; database:Terminal_Bus_CEO";
+            string connString = "data source= DESKTOP-LAFVQ8T\\MAHFUDZSIDDIQ;Initial Catalog=Terminal_Bus_CEO;Persist Security Info=True;User ID = sa; Password = 123";
             string query = "INSERT INTO Penumpang values(@Id_Penumpang, @Nama, @Alamat, No_HP)";
 
             using (SqlConnection connection = new SqlConnection(connString))
             {
-                using (SqlCommand cmd = new SqlCommand(query, conn))
+                using (SqlCommand cmd = new SqlCommand(query, sqlConnection))
                 {
-                    cmd.Parameters.AddWithValue("@Id_Penumpang", textBox1 );
-                    cmd.Parameters.AddWithValue("@Nama", textBox2 );
+                    cmd.Parameters.AddWithValue("@Id_Penumpang", textBox1);
+                    cmd.Parameters.AddWithValue("@Nama", textBox2);
                     cmd.Parameters.AddWithValue("@Alamat", textBox3);
                     cmd.Parameters.AddWithValue("@No_HP", textBox4);
                     try
                     {
-                        conn.Open();
+                        sqlConnection.Open();
                         int rowsAffected = cmd.ExecuteNonQuery();
                         MessageBox.Show("Data successfully added.");
                     }
                     catch (SqlException ex)
                     {
-                        MessageBox.Show("An error occurred: " + ex.Message + " (Error Code: " + ex.Number + ")");
+                        MessageBox.Show("TERJADI KESALAHAN: " + ex.Message + " (Error Code: " + ex.Number + ")");
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("An error occurred: " + ex.Message);
+                        MessageBox.Show("TERJADI KESALAHAN: " + ex.Message);
                     }
 
                 }
-            } 
+            }
         }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            string connString = "data source= DESKTOP-LAFVQ8T\\MAHFUDZSIDDIQ;Initial Catalog=Terminal_Bus_CEO;Persist Security Info=True;User ID = sa; Password = 123";
+
         }
-    } 
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            string connString = "data source= DESKTOP-LAFVQ8T\\MAHFUDZSIDDIQ;Initial Catalog=Terminal_Bus_CEO;Persist Security Info=True;User ID = sa; Password = 123";
+            string query = "UPDATE Penumpang SET Id_Penumpang = @Id_Penumpang, Nama = @Nama, Alamat = @Alamat, No_HP = @No_HP";
+
+            using (SqlConnection connection = new SqlConnection(connString))
+            {
+                using (SqlCommand cmd = new SqlCommand(query, sqlConnection))
+                {
+                    cmd.Parameters.AddWithValue("@Id_Penumpang", textBox1);
+                    cmd.Parameters.AddWithValue("@Nama", textBox2);
+                    cmd.Parameters.AddWithValue("@Alamat", textBox3);
+                    cmd.Parameters.AddWithValue("@No_HP", textBox4);
+                    try
+                    {
+                        sqlConnection.Open();
+                        int rowsAffected = cmd.ExecuteNonQuery();
+                        MessageBox.Show("Data successfully added.");
+                    }
+                    catch (SqlException ex)
+                    {
+                        MessageBox.Show("TERJADI KESALAHAN: " + ex.Message + " (Error Code: " + ex.Number + ")");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("TERJADI KESALAHAN: " + ex.Message);
+                    }
+                }
+            }
+        }
+    }
 }
