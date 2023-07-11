@@ -136,6 +136,36 @@ namespace Project_Akhir
                 }
             }
         }
-         
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            string connString = "data source= DESKTOP-LAFVQ8T\\MAHFUDZSIDDIQ;Initial Catalog=Terminal_Bus_CEO;Persist Security Info=True;User ID = sa; Password = 123";
+            string query = "DELETE FROM Penumpang WHERE Id_Penumpang = @Id_Penumpang";
+
+            using (SqlConnection connection = new SqlConnection(connString))
+            {
+                using (SqlCommand cmd = new SqlCommand(query, sqlConnection))
+                {
+                    cmd.Parameters.AddWithValue("@Id_Penumpang", textBox1);
+
+                    try
+                    {
+                        sqlConnection.Open();
+                        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
+                        DataTable dataTable = new DataTable();
+                        adapter.Fill(dataTable);
+                        dataGridView1.DataSource = dataTable;
+                    }
+                    catch (SqlException ex)
+                    {
+                        MessageBox.Show("TERJADI KESALAHAN: " + ex.Message + " (Error Code: " + ex.Number + ")");
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("TERJADI KESALAHAN: " + ex.Message);
+                    }
+                }
+            }
+        }
     }
 }
