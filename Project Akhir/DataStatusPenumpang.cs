@@ -99,5 +99,55 @@ namespace Project_Akhir
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            string nomorSeat = textBox2.Text;
+
+
+            if (nomorSeat == "")
+            {
+                MessageBox.Show("MASUKKAN NOMOR SEAT", "PERINGATAN", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                koneksi.Open();
+                string str = "DELETE FROM Tiket WHERE Nomor_Seat = @Nomor_Seat";
+                SqlCommand cmd = new SqlCommand(str, koneksi);
+                cmd.CommandType = CommandType.Text;
+                cmd.Parameters.Add(new SqlParameter("Nomor_Seat", nomorSeat));
+
+
+
+                koneksi.Close();
+                MessageBox.Show("Data Berhasil disimpan", "sukses",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            string tanggal = textBox3.Text;
+
+
+            if (tanggal == "")
+            {
+                MessageBox.Show("MASUKKAN TANGGAL", "PERINGATAN", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                koneksi.Open();
+                string str = "SELECT * FROM Tiket WHERE Tanggal = @Tanggal";
+                SqlCommand cmd = new SqlCommand(str, koneksi);
+                cmd.CommandType = CommandType.Text;
+                cmd.Parameters.Add(new SqlParameter("Tanggal", tanggal));
+
+
+
+                koneksi.Close();
+                MessageBox.Show("Data Berhasil disimpan", "sukses",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
     }
 }
