@@ -61,5 +61,33 @@ namespace Project_Akhir
 
             }
         }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            string idDriver = textBox1.Text;
+            string nama = textBox2.Text;
+            string noHP = textBox3.Text;
+
+
+            if (idDriver == "")
+            {
+                MessageBox.Show("MASUKKAN ID DRIVER", "PERINGATAN", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                koneksi.Open();
+                string str = "UPDATE Driver SET Id_Driver = @Id_Driver, Nama = @Nama, No_HP = @No_HP";
+                SqlCommand cmd = new SqlCommand(str, koneksi);
+                cmd.CommandType = CommandType.Text;
+                cmd.Parameters.Add(new SqlParameter("Id_Driver", idDriver));
+                cmd.Parameters.Add(new SqlParameter("Nama", nama));
+                cmd.Parameters.Add(new SqlParameter("No_HP", noHP));
+
+
+                koneksi.Close();
+                MessageBox.Show("Data Berhasil disimpan", "sukses",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
     }
 }

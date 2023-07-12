@@ -74,6 +74,7 @@ namespace Project_Akhir
             this.button6.TabIndex = 41;
             this.button6.Text = "UPDATE";
             this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // button7
             // 
