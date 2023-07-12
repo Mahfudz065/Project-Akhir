@@ -89,5 +89,30 @@ namespace Project_Akhir
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            string nama = textBox2.Text;
+
+
+            if (nama == "")
+            {
+                MessageBox.Show("MASUKKAN NAMA DRIVER", "PERINGATAN", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                koneksi.Open();
+                string str = "DELETE FROM Driver WHERE Nama = @Nama";
+                SqlCommand cmd = new SqlCommand(str, koneksi);
+                cmd.CommandType = CommandType.Text;
+                cmd.Parameters.Add(new SqlParameter("Nama", nama));
+
+
+
+                koneksi.Close();
+                MessageBox.Show("Data Berhasil disimpan", "sukses",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
     }
 }
