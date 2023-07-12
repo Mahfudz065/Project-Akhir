@@ -61,5 +61,12 @@ namespace Project_Akhir
             dataDriver.Show();
             this.Hide();
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            DataRute dataRute = new DataRute();
+            dataRute.Show();
+            this.Hide();
+        }
     }
 }

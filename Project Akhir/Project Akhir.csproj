@@ -58,6 +58,12 @@
     <Compile Include="DataPenumpang.Designer.cs">
       <DependentUpon>DataPenumpang.cs</DependentUpon>
     </Compile>
+    <Compile Include="DataRute.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DataRute.Designer.cs">
+      <DependentUpon>DataRute.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataStatusPenumpang.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -88,6 +94,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DataPenumpang.resx">
       <DependentUpon>DataPenumpang.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DataRute.resx">
+      <DependentUpon>DataRute.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="DataStatusPenumpang.resx">
       <DependentUpon>DataStatusPenumpang.cs</DependentUpon>

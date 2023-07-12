@@ -39,6 +39,8 @@ namespace Project_Akhir
             this.label4 = new System.Windows.Forms.Label();
             this.button4 = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
+            this.button5 = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label3
@@ -140,11 +142,34 @@ namespace Project_Akhir
             this.label5.TabIndex = 13;
             this.label5.Text = "Data Driver";
             // 
+            // button5
+            // 
+            this.button5.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("button5.BackgroundImage")));
+            this.button5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.button5.Location = new System.Drawing.Point(496, 275);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(204, 110);
+            this.button5.TabIndex = 14;
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Comic Sans MS", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(541, 405);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(111, 29);
+            this.label6.TabIndex = 15;
+            this.label6.Text = "Data Rute";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(907, 485);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.button5);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.label4);
@@ -173,6 +198,8 @@ namespace Project_Akhir
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Label label6;
     }
 }
 
