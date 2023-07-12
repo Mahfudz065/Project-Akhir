@@ -72,7 +72,32 @@ namespace Project_Akhir
 
         private void button3_Click(object sender, EventArgs e)
         {
+            string idTiket = textBox1.Text;
+            string nomorSeat = textBox2.Text;
+            string tanggal = textBox3.Text;
+            string harga = textBox4.Text;
 
+
+            if (idTiket == "")
+            {
+                MessageBox.Show("MASUKKAN ID PENUMPANG", "PERINGATAN", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                koneksi.Open();
+                string str = "UPDATE Tiket SET Id_Tiket = @Id_Tiket, Nomor_Seat = @Nomor_Seat, Tanggal = @Tanggal, Harga = @Harga";
+                SqlCommand cmd = new SqlCommand(str, koneksi);
+                cmd.CommandType = CommandType.Text;
+                cmd.Parameters.Add(new SqlParameter("Id_Tiket", idTiket));
+                cmd.Parameters.Add(new SqlParameter("Nomor_Seat", nomorSeat));
+                cmd.Parameters.Add(new SqlParameter("Tanggal", tanggal));
+                cmd.Parameters.Add(new SqlParameter("Harga", harga));
+
+
+                koneksi.Close();
+                MessageBox.Show("Data Berhasil disimpan", "sukses",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
     }
 }
