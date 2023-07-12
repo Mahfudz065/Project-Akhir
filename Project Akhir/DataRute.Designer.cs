@@ -86,6 +86,7 @@ namespace Project_Akhir
             this.button2.TabIndex = 38;
             this.button2.Text = "DELETE";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button1
             // 

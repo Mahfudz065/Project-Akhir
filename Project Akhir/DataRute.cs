@@ -79,8 +79,33 @@ namespace Project_Akhir
                 cmd.CommandType = CommandType.Text;
                 cmd.Parameters.Add(new SqlParameter("Id_Rute", idRute));
                 cmd.Parameters.Add(new SqlParameter("Nama_Rute", namaRute));
-                cmd.Parameters.Add(new SqlParameter("Waktu_Kebrangkatan",  waktuKeberangkatan));
+                cmd.Parameters.Add(new SqlParameter("Waktu_Kebrangkatan", waktuKeberangkatan));
                 cmd.Parameters.Add(new SqlParameter("Waktui_Kedatangan", waktuKedatangan));
+
+
+                koneksi.Close();
+                MessageBox.Show("Data Berhasil disimpan", "sukses",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            string namaRute = textBox2.Text;
+
+
+            if (namaRute == "")
+            {
+                MessageBox.Show("MASUKKAN NAMA RUTE", "PERINGATAN", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                koneksi.Open();
+                string str = "DELETE FROM Rute WHERE Nama_Rute = @Nama_Rute";
+                SqlCommand cmd = new SqlCommand(str, koneksi);
+                cmd.CommandType = CommandType.Text;
+                cmd.Parameters.Add(new SqlParameter("Nama_Rute", namaRute));
+
 
 
                 koneksi.Close();
