@@ -67,6 +67,7 @@ namespace Project_Akhir
             this.button4.TabIndex = 40;
             this.button4.Text = "SEARCH";
             this.button4.UseVisualStyleBackColor = true;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // button3
             // 

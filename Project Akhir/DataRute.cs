@@ -113,5 +113,30 @@ namespace Project_Akhir
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            string waktuKeberangkatan = textBox3.Text;
+
+
+            if (waktuKeberangkatan == "")
+            {
+                MessageBox.Show("MASUKKAN WAKTU KEBERANGKATAN", "PERINGATAN", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                koneksi.Open();
+                string str = "SELECT * FROM Rute WHERE Waktu_Keberangkatan = @Waktu_Keberangkatan";
+                SqlCommand cmd = new SqlCommand(str, koneksi);
+                cmd.CommandType = CommandType.Text;
+                cmd.Parameters.Add(new SqlParameter("Tanggal", waktuKeberangkatan));
+
+
+
+                koneksi.Close();
+                MessageBox.Show("Data Berhasil disimpan", "sukses",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
     }
 }
