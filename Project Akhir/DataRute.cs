@@ -58,5 +58,35 @@ namespace Project_Akhir
 
             }
         }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            string idRute = textBox1.Text;
+            string namaRute = textBox2.Text;
+            string waktuKeberangkatan = textBox3.Text;
+            string waktuKedatangan = textBox4.Text;
+
+
+            if (idRute == "")
+            {
+                MessageBox.Show("MASUKKAN ID RUTE", "PERINGATAN", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                koneksi.Open();
+                string str = "UPDATE Rute SET Id_Rute = @Id_Rute, Nama_Rute = @Nama_Rute, Waktu_Keberangkatan = @Waktu_Keberangkatan, Waktu_Kedatangan = @Waktu_Kedatangan";
+                SqlCommand cmd = new SqlCommand(str, koneksi);
+                cmd.CommandType = CommandType.Text;
+                cmd.Parameters.Add(new SqlParameter("Id_Rute", idRute));
+                cmd.Parameters.Add(new SqlParameter("Nama_Rute", namaRute));
+                cmd.Parameters.Add(new SqlParameter("Waktu_Kebrangkatan",  waktuKeberangkatan));
+                cmd.Parameters.Add(new SqlParameter("Waktui_Kedatangan", waktuKedatangan));
+
+
+                koneksi.Close();
+                MessageBox.Show("Data Berhasil disimpan", "sukses",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
     }
 }
