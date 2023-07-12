@@ -114,5 +114,41 @@ namespace Project_Akhir
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            string noHP = textBox3.Text;
+
+
+            if (noHP == "")
+            {
+                MessageBox.Show("MASUKKAN NOMOR HP", "PERINGATAN", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                koneksi.Open();
+                string str = "SELECT * FROM Driver WHERE No_HP = @No_HP";
+                SqlCommand cmd = new SqlCommand(str, koneksi);
+                cmd.CommandType = CommandType.Text;
+                cmd.Parameters.Add(new SqlParameter("No_HP", noHP));
+
+
+
+                koneksi.Close();
+                MessageBox.Show("Data Berhasil disimpan", "sukses",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            koneksi.Open();
+            string str = "Select * From dbo.Driver";
+            SqlDataAdapter da = new SqlDataAdapter(str, koneksi);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+            dataGridView1.DataSource = ds.Tables[0];
+            koneksi.Close();
+        }
     }
 }
