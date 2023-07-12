@@ -161,6 +161,11 @@ namespace Project_Akhir
                     MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
+
+        private void dataGridView1_CellContentClick_1(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }
 

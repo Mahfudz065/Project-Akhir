@@ -80,6 +80,9 @@
     <EmbeddedResource Include="DataPenumpang.resx">
       <DependentUpon>DataPenumpang.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DataStatusPenumpang.resx">
+      <DependentUpon>DataStatusPenumpang.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DataTerminal.resx">
       <DependentUpon>DataTerminal.cs</DependentUpon>
     </EmbeddedResource>

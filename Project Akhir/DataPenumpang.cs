@@ -13,13 +13,16 @@ namespace Project_Akhir
 {
     public partial class DataPenumpang : Form
     {
-        public SqlConnection sqlConnection;
+        string connstring = "data source= DESKTOP-LAFVQ8T\\MAHFUDZSIDDIQ;Initial Catalog=Terminal_Bus_CEO;Persist Security Info=True;User ID = sa; Password = 123";
+        public SqlConnection koneksi;
+
 
         public object IdPenumpang { get; private set; }
 
         public DataPenumpang()
         {
             InitializeComponent();
+            koneksi = new SqlConnection(connstring);
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -36,136 +39,125 @@ namespace Project_Akhir
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string connString = "data source= DESKTOP-LAFVQ8T\\MAHFUDZSIDDIQ;Initial Catalog=Terminal_Bus_CEO;Persist Security Info=True;User ID = sa; Password = 123";
-            string query = "INSERT INTO Penumpang values(@Id_Penumpang, @Nama, @Alamat, No_HP)";
+            string idPenumpang = textBox1.Text;
+            string nama = textBox2.Text;
+            string alamat = textBox3.Text;
+            string noHp = textBox4.Text;
 
-            using (SqlConnection connection = new SqlConnection(connString))
+            if (idPenumpang == "")
             {
-                using (SqlCommand cmd = new SqlCommand(query, sqlConnection))
-                {
-                    cmd.Parameters.AddWithValue("@Id_Penumpang", textBox1);
-                    cmd.Parameters.AddWithValue("@Nama", textBox2);
-                    cmd.Parameters.AddWithValue("@Alamat", textBox3);
-                    cmd.Parameters.AddWithValue("@No_HP", textBox4);
-                    try
-                    {
-                        sqlConnection.Open();
-                        int rowsAffected = cmd.ExecuteNonQuery();
-                        MessageBox.Show("Data successfully added.");
-                    }
-                    catch (SqlException ex)
-                    {
-                        MessageBox.Show("TERJADI KESALAHAN: " + ex.Message + " (Error Code: " + ex.Number + ")");
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("TERJADI KESALAHAN: " + ex.Message);
-                    }
-
-                }
+                MessageBox.Show("MASUKKAN ID PENUMPANG", "warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-        }
+            else
+            {
+                koneksi.Open();
+                string str = "insert into dbo.Penumpang (Id_Penumpang, Nama, Alamat, No_HP)" + "values(@Id_Penumpang, @Nama, @Alamat. @N0_HP)";
+                SqlCommand cmd = new SqlCommand(str, koneksi);
+                cmd.CommandType = CommandType.Text;
+                cmd.Parameters.Add(new SqlParameter("Id_Penumpang", idPenumpang));
+                cmd.Parameters.Add(new SqlParameter("Nama", nama));
+                cmd.Parameters.Add(new SqlParameter("Alamat", alamat));
+                cmd.Parameters.Add(new SqlParameter("No_HP", noHp));
 
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
 
+                koneksi.Close();
+                MessageBox.Show("Data Berhasil disimpan", "SUKSES",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            string connString = "data source= DESKTOP-LAFVQ8T\\MAHFUDZSIDDIQ;Initial Catalog=Terminal_Bus_CEO;Persist Security Info=True;User ID = sa; Password = 123";
-            string query = "UPDATE Penumpang SET Id_Penumpang = @Id_Penumpang, Nama = @Nama, Alamat = @Alamat, No_HP = @No_HP";
+            string idPenumpang = textBox1.Text;
+            string nama = textBox2.Text;
+            string alamat = textBox3.Text;
+            string noHp = textBox4.Text;
 
-            using (SqlConnection connection = new SqlConnection(connString))
+
+            if (idPenumpang == "")
             {
-                using (SqlCommand cmd = new SqlCommand(query, sqlConnection))
-                {
-                    cmd.Parameters.AddWithValue("@Id_Penumpang", textBox1);
-                    cmd.Parameters.AddWithValue("@Nama", textBox2);
-                    cmd.Parameters.AddWithValue("@Alamat", textBox3);
-                    cmd.Parameters.AddWithValue("@No_HP", textBox4);
-                    try
-                    {
-                        sqlConnection.Open();
-                        int rowsAffected = cmd.ExecuteNonQuery();
-                        MessageBox.Show("DATA BERHASIL DITAMBAHKAN");
-                    }
-                    catch (SqlException ex)
-                    {
-                        MessageBox.Show("TERJADI KESALAHAN: " + ex.Message + " (Error Code: " + ex.Number + ")");
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("TERJADI KESALAHAN: " + ex.Message);
-                    }
-                }
+                MessageBox.Show("MASUKKAN ID PENUMPANG", "PERINGATAN", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-        }
+            else
+            {
+                koneksi.Open();
+                string str = "UPDATE Penumpang SET Id_Penumpang = @Id_Penumpang, Nama = @Nama, Alamat = @Alamat, No_HP = @No_HP";
+                SqlCommand cmd = new SqlCommand(str, koneksi);
+                cmd.CommandType = CommandType.Text;
+                cmd.Parameters.Add(new SqlParameter("Id_Penumpang", idPenumpang));
+                cmd.Parameters.Add(new SqlParameter("Nama", nama));
+                cmd.Parameters.Add(new SqlParameter("Alamat", alamat));
+                cmd.Parameters.Add(new SqlParameter("No_HP", noHp));
 
-        private void button6_Click(object sender, EventArgs e)
-        {
-            DataTerminal dataTerminal = new DataTerminal();
-            dataTerminal.Show();
-            this.Hide();
+
+                koneksi.Close();
+                MessageBox.Show("Data Berhasil disimpan", "sukses",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            string connString = "data source= DESKTOP-LAFVQ8T\\MAHFUDZSIDDIQ;Initial Catalog=Terminal_Bus_CEO;Persist Security Info=True;User ID = sa; Password = 123";
-            string query = "DELETE FROM Penumpang WHERE Id_Penumpang = @Id_Penumpang";
+            string idPenumpang = textBox1.Text;
 
-            using (SqlConnection connection = new SqlConnection(connString))
+
+            if (idPenumpang == "")
             {
-                using (SqlCommand cmd = new SqlCommand(query, sqlConnection))
-                {
-                    cmd.Parameters.AddWithValue("@Id_Penumpang", textBox1);
-                    try
-                    {
-                        sqlConnection.Open();
-                        int rowsAffected = cmd.ExecuteNonQuery();
-                        MessageBox.Show("DATA BERHASIL DITAMBAHKAN");
-                    }
-                    catch (SqlException ex)
-                    {
-                        MessageBox.Show("TERJADI KESALAHAN: " + ex.Message + " (Error Code: " + ex.Number + ")");
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("TERJADI KESALAHAN: " + ex.Message);
-                    }
-                }
+                MessageBox.Show("MASUKKAN ID PENUMPANG", "PERINGATAN", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                koneksi.Open();
+                string str = "DELETE FROM Penumpang WHERE Id_Penumpang = @Id_Penumpang";
+                SqlCommand cmd = new SqlCommand(str, koneksi);
+                cmd.CommandType = CommandType.Text;
+                cmd.Parameters.Add(new SqlParameter("Id_Penumpang", idPenumpang));
+
+
+
+                koneksi.Close();
+                MessageBox.Show("Data Berhasil disimpan", "sukses",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
-            string connString = "data source= DESKTOP-LAFVQ8T\\MAHFUDZSIDDIQ;Initial Catalog=Terminal_Bus_CEO;Persist Security Info=True;User ID = sa; Password = 123";
-            string query = "DELETE FROM Penumpang WHERE Id_Penumpang = @Id_Penumpang";
+            string nama = textBox2.Text;
 
-            using (SqlConnection connection = new SqlConnection(connString))
+
+            if (nama == "")
             {
-                using (SqlCommand cmd = new SqlCommand(query, sqlConnection))
-                {
-                    cmd.Parameters.AddWithValue("@Id_Penumpang", textBox1);
-
-                    try
-                    {
-                        sqlConnection.Open();
-                        SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-                        DataTable dataTable = new DataTable();
-                        adapter.Fill(dataTable);
-                        dataGridView1.DataSource = dataTable;
-                    }
-                    catch (SqlException ex)
-                    {
-                        MessageBox.Show("TERJADI KESALAHAN: " + ex.Message + " (Error Code: " + ex.Number + ")");
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("TERJADI KESALAHAN: " + ex.Message);
-                    }
-                }
+                MessageBox.Show("MASUKKAN NAMA PENUMPANG", "PERINGATAN", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+            else
+            {
+                koneksi.Open();
+                string str = "SELECT * FROM Penumpang WHERE Nama = @Nama";
+                SqlCommand cmd = new SqlCommand(str, koneksi);
+                cmd.CommandType = CommandType.Text;
+                cmd.Parameters.Add(new SqlParameter("Nama", nama));
+
+
+
+                koneksi.Close();
+                MessageBox.Show("Data Berhasil disimpan", "sukses",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            koneksi.Open();
+            string str = "Select * From dbo.Penumpang";
+            SqlDataAdapter da = new SqlDataAdapter(str, koneksi);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+            dataGridView1.DataSource = ds.Tables[0];
+            koneksi.Close();
         }
     }
 }
+
+        

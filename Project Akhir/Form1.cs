@@ -42,5 +42,17 @@ namespace Project_Akhir
             dataTerminal.Show();
             this.Hide();
         }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click_1(object sender, EventArgs e)
+        {
+            DataStatusPenumpang dataStatusPenumpang = new DataStatusPenumpang();
+            dataStatusPenumpang.Show();
+            this.Hide();
+        }
     }
 }
