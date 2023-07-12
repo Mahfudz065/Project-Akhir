@@ -54,5 +54,12 @@ namespace Project_Akhir
             dataStatusPenumpang.Show();
             this.Hide();
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            DataDriver dataDriver = new DataDriver();
+            dataDriver.Show();
+            this.Hide();
+        }
     }
 }

@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DataDriver.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DataDriver.Designer.cs">
+      <DependentUpon>DataDriver.cs</DependentUpon>
+    </Compile>
     <Compile Include="DataPenumpang.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -77,6 +83,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Terminal_Bus_CEODataSet.xsd</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="DataDriver.resx">
+      <DependentUpon>DataDriver.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="DataPenumpang.resx">
       <DependentUpon>DataPenumpang.cs</DependentUpon>
     </EmbeddedResource>
