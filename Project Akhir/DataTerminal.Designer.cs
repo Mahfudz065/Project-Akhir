@@ -77,6 +77,7 @@ namespace Project_Akhir
             // 
             // dataGridView1
             // 
+            this.dataGridView1.AccessibleRole = System.Windows.Forms.AccessibleRole.ScrollBar;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(445, 39);
             this.dataGridView1.Name = "dataGridView1";
@@ -112,6 +113,7 @@ namespace Project_Akhir
             this.button5.TabIndex = 30;
             this.button5.Text = "SEARCH";
             this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button6
             // 
@@ -121,6 +123,7 @@ namespace Project_Akhir
             this.button6.TabIndex = 29;
             this.button6.Text = "UPDATE";
             this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // button7
             // 
@@ -130,6 +133,7 @@ namespace Project_Akhir
             this.button7.TabIndex = 28;
             this.button7.Text = "DELETE";
             this.button7.UseVisualStyleBackColor = true;
+            this.button7.Click += new System.EventHandler(this.button7_Click);
             // 
             // button8
             // 

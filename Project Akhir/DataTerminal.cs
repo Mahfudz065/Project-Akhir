@@ -13,15 +13,19 @@ namespace Project_Akhir
 {
     public partial class DataTerminal : Form
     {
-        public SqlConnection sqlConnection;
+        string connstring = "data source= DESKTOP-LAFVQ8T\\MAHFUDZSIDDIQ;Initial Catalog=Terminal_Bus_CEO;Persist Security Info=True;User ID = sa; Password = 123";
+        public SqlConnection koneksi;
+
         public DataTerminal()
         {
             InitializeComponent();
+            koneksi = new SqlConnection(connstring);
+
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            DataPenumpang  dataPenumpang = new DataPenumpang();
+            DataPenumpang dataPenumpang = new DataPenumpang();
             dataPenumpang.Show();
             this.Hide();
         }
@@ -40,32 +44,124 @@ namespace Project_Akhir
 
         private void button8_Click(object sender, EventArgs e)
         {
-            string connString = "data source= DESKTOP-LAFVQ8T\\MAHFUDZSIDDIQ;Initial Catalog=Terminal_Bus_CEO;Persist Security Info=True;User ID = sa; Password = 123";
-            string query = "INSERT INTO Bus Values (@Id_Bus, @Nama_Bus, @Type_Bus)";
 
-            using (SqlConnection connection = new SqlConnection(connString))
+            string idBus = textBox1.Text;
+            string namaBus = textBox2.Text;
+            string typeBus = textBox3.Text;
+
+
+            if (idBus == "")
             {
-                using (SqlCommand cmd = new SqlCommand(query, sqlConnection))
-                {
-                    cmd.Parameters.AddWithValue("@Id_Bus", textBox1);
-                    cmd.Parameters.AddWithValue("@Nama_Bus", textBox2);
-                    cmd.Parameters.AddWithValue("@Type_Bus", textBox3);
-                    try
-                    {
-                        sqlConnection.Open();
-                        int rowsAffected = cmd.ExecuteNonQuery();
-                        MessageBox.Show("Data Berhasil Ditambahkan.");
-                    }
-                    catch (SqlException ex)
-                    {
-                        MessageBox.Show("TERJADI KESALAHAN: " + ex.Message + " (Error Code: " + ex.Number + ")");
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("TERJADI KESALAHAN: " + ex.Message);
-                    }
-                }
+                MessageBox.Show("masukan id bus", "warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                koneksi.Open();
+                string str = "insert into dbo.Bus (Id_Bus, Nama_Bus, Type_Bus)" + "values(@Id_Bus, @Nama_Bus, @Type_Bus)";
+                SqlCommand cmd = new SqlCommand(str, koneksi);
+                cmd.CommandType = CommandType.Text;
+                cmd.Parameters.Add(new SqlParameter("Id_Bus", idBus));
+                cmd.Parameters.Add(new SqlParameter("Nama_Bus", namaBus));
+                cmd.Parameters.Add(new SqlParameter("nh", typeBus));
+
+
+                koneksi.Close();
+                MessageBox.Show("Data Berhasil disimpan", "sukses",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+            }
+
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            koneksi.Open();
+            string str = "Select * From dbo.Bus";
+            SqlDataAdapter da = new SqlDataAdapter(str, koneksi);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+            dataGridView1.DataSource = ds.Tables[0];
+            koneksi.Close();
+        }
+
+        private void button6_Click(object sender, EventArgs e)
+        {
+            string idBus = textBox1.Text;
+            string namaBus = textBox2.Text;
+            string typeBus = textBox3.Text;
+
+
+            if (idBus == "")
+            {
+                MessageBox.Show("masukan id bus", "warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                koneksi.Open();
+                string str = "UPDATE Bus SET Id_Bus = @Id_bus, Nama Bus = @Nama Bus, Type Bus = @TypeBus";
+                SqlCommand cmd = new SqlCommand(str, koneksi);
+                cmd.CommandType = CommandType.Text;
+                cmd.Parameters.Add(new SqlParameter("Id_Bus", idBus));
+                cmd.Parameters.Add(new SqlParameter("Nama_Bus", namaBus));
+                cmd.Parameters.Add(new SqlParameter("nh", typeBus));
+
+
+                koneksi.Close();
+                MessageBox.Show("Data Berhasil disimpan", "sukses",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            string idBus = textBox1.Text;
+
+
+            if (idBus == "")
+            {
+                MessageBox.Show("masukan id bus", "warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                koneksi.Open();
+                string str = "DELETE FROM Bus WHERE Id_Bus = @Id_Bus";
+                SqlCommand cmd = new SqlCommand(str, koneksi);
+                cmd.CommandType = CommandType.Text;
+                cmd.Parameters.Add(new SqlParameter("Id_Bus", idBus));
+
+
+
+                koneksi.Close();
+                MessageBox.Show("Data Berhasil disimpan", "sukses",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            string namaBus = textBox2.Text;
+
+
+            if (namaBus == "")
+            {
+                MessageBox.Show("MASUKKAN NAMA BUS", "warning", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            else
+            {
+                koneksi.Open();
+                string str = "SELECT * FROM Bus WHERE Nama_Bus = @Nama_Bus";
+                SqlCommand cmd = new SqlCommand(str, koneksi);
+                cmd.CommandType = CommandType.Text;
+                cmd.Parameters.Add(new SqlParameter("Id_Bus", namaBus));
+
+
+
+                koneksi.Close();
+                MessageBox.Show("Data Berhasil disimpan", "sukses",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
     }
 }
+
+        
